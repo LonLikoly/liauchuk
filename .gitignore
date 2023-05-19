@@ -8,7 +8,7 @@
 /docs/
 
 # you may install these packages with `oil package`.
-# http://fuelphp.com/docs/packages/oil/package.html
+# http://fuelphp.com/docs/packages/oil/package.php
 # /fuel/packages/auth/
 # /fuel/packages/email/
 # /fuel/packages/oil/
