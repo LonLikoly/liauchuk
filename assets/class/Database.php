@@ -14,55 +14,60 @@ class Database
     public $num_rows;
     public $sql;
 
+    public function __construct()
+    {
+        $this->getConnection();
+    }
+
     public function getConnection()
     {
-        $this->conn = null;
-
-        try {
-            $this->conn = new mysqli ($this->host, $this->username, $this->password, $this->db_name);
-        } catch (PDOException $exception) {
-            echo "Error connection: " . $exception->getMessage();
+        if (!$this->conn) //проверяет наличие объекта подключения
+        {
+            try {
+                $this->conn = new mysqli ($this->host, $this->username, $this->password, $this->db_name); // если оштбки не обнаружено  
+            } 
+            catch (Exception $exception) // в случае несоответсвия условиям выводим ошибку 
+            {
+                echo "Error connection: " . $exception->getMessage();
+            }
         }
-
         return $this->conn;
     }
     public function runQuery($sql)
     {
         try {
-            $this->result = $this->conn->query($sql);
-            $this->info = $this->conn->info;
-            $this->insertId =$this->conn->insert_id;
-            $this->num_rows = $this->result->num_rows;
-        } catch (PDOException $exception) {
-            echo "Error connection: " . $exception->getMessage();
+            $this->result = $this->conn->query($sql); // выполняем запрос к датабазе 
+            $this->num_rows = $this->result->num_rows; // присваиваем result значеие num_rows (кол-во строк)
+        } 
+        catch (Exception $exception)  //иначе выводим ошибку 
+        {
+            echo "Error connection: " . $exception->getMessage(); //выводит причину ошибки
         }
-
-
     }
-    public function getRow($sql='')
+    public function getRow($sql='') // создаем метод getRow который возвращает строку из результата запроса  в виде ассоц. массива
     {
         if(!$this->result or ($sql and $this->sql != $sql))
         {
-            $this->sql = $sql;
-            $this->runQuery($sql);
+            $this->sql = $sql; //присваивем новое значение существующему, если оно отсутствует 
+            $this->runQuery($sql); //обращаемся к методу runQuery со значением $sql
         }
-        return $this->result->fetch_assoc();
+        return $this->result->fetch_assoc();  //?mysqli_fetch_assoc — Выбирает следующую строку из набора результатов и помещает её в ассоциативный массив
     }
 
-    public function getArray($sql='')
+    public function getArray($sql='') // создаем метод getArray который возвращает неассот.массив ассот.массива и задаем ему значение  $sql=''
     {
-        if(!$this->result or ($sql and $this->sql != $sql))
+        if(!$this->result or ($sql and $this->sql != $sql)) // ?
         {
-            $this->sql = $sql;
-            $this->runQuery($sql);
+            $this->sql = $sql; //присваивем новое значение существующему, если оно отсутствует 
+            $this->runQuery($sql); //обращаемся к методу runQuery со значением $sql
         }
-        if($this->num_rows > 0)
+        if($this->num_rows) // если num_rows!=0 =>
         {
-            return $this->result->fetch_all(MYSQLI_ASSOC);
+            return $this->result->fetch_all(MYSQLI_ASSOC); //?
         }
         else
         {
-            return [];
+            return [];  //?
         }
     }
 

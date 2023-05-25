@@ -1,3 +1,28 @@
+<head>
+    <title>Zay Shop - Product Listing Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
     <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
@@ -17,10 +42,6 @@
             </div>
         </div>
     </nav>
-    <!-- Close Top Nav -->
-
-
-    <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
@@ -70,18 +91,19 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
                     <?php
                         if ($_SESSION['user_id']) 
                         {
                     ?>
-                    <a class="nav-icon position-relative text-decoration-none" title = "Logout" href="/login.php">
+                    <a class="nav-icon position-relative text-decoration-none">
                         <i class="fa fa-fw fa-user text-light mr-3"></i>
                        <?= $_SESSION['user']['firstName'] ?>
                     </a>
+                    <a class="nav-icon position-relative text-decoration-none" title = "Logout" href="/index.php?exit=1">
+                       
+                        <u>Logout
+                        </u>
+                                        </a>
                     <?php
                         }
                         else
