@@ -12,7 +12,7 @@ if ($_POST['email'] && $_POST['password'])
      $mysq->runQuery($sql);
      if ($mysq->num_rows == 1) // проверка на существование файлов
      {
-        $_SESSION['user'] = $mysq->getRow();
+        $_SESSION['user'] = $mysq->getRow(); //обращение к датабазе с запросом getRow
         $_SESSION['user_id'] = $_SESSION['user']['id']; 
       //  var_dump($_SESSION);
      }

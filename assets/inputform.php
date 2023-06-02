@@ -2,20 +2,15 @@
 require_once ($_SERVER["DOCUMENT_ROOT"]."/assets/class/Database.php");
 require_once ('../assets/class/Product.php');
 $product = new Product ($_GET['id']);
-
  //if ($_GET['id'])
-
 if ($_POST['Send'])
 { 
-      
-
+     // var_dump($_FILES);
 $url = '/assets/img/product/';
    // 1)Проверяем, существует ли имя.
 if($_FILES['FILE']['name']){
-   
     if($_FILES['FILE']['type'] == 'image/jpeg' || $_FILES['FILE']['type'] == 'image/png') 
  {
-    
 // 2)Проверяем размер файла
         if($_FILES['FILE']['size'] > 0 && $_FILES['FILE']['size'] <= 1024000) 
     {

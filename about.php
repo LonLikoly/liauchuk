@@ -67,7 +67,7 @@ https://templatemo.com/tm-559-zay-shop
     </section>
     <!-- Close Banner -->
 
-    <!-- Start Section -->
+    <!-- 
     <section class="container py-5">
         <div class="row text-center pt-5 pb-3">
             <div class="col-lg-6 m-auto">
@@ -109,7 +109,7 @@ https://templatemo.com/tm-559-zay-shop
             </div>
         </div>
     </section>
-    <!-- End Section -->
+     End Section -->
 
     <!-- Start Brands -->
     <section class="bg-light py-5">

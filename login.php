@@ -39,8 +39,7 @@ session_start();
             }
             else
             {
-                $sql = "INSERT into user (firstName,  middleName, lastName, mobile, email, passwordHash,registeredAt) values --иначе,псваиваем значения столбцам датабазы user соответственно--
-                (
+                $sql = "INSERT into user (firstName,  middleName, lastName, mobile, email, passwordHash,registeredAt) values     (
                         '".addslashes($_POST['firstName'])."',
                         '".addslashes($_POST['middleName'])."',
                         '".addslashes($_POST['lastName'])."',
@@ -51,6 +50,7 @@ session_start();
                 unset($_GET['action']); // удаляем 'action'
           
             }
+            
 
         }
         else 

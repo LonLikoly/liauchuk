@@ -36,7 +36,7 @@ class Database
     public function runQuery($sql)
     {
         try {
-            $this->result = $this->conn->query($sql); // выполняем запрос к датабазе 
+            $this->result = $this->conn->query($sql); // выполняем запрос к датабазе (присваивает значению result результат запроса query)
             $this->num_rows = $this->result->num_rows; // присваиваем result значеие num_rows (кол-во строк)
         } 
         catch (Exception $exception)  //иначе выводим ошибку 

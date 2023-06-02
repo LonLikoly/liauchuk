@@ -43,8 +43,7 @@ class Product
                  <div class="card mb-4 product-wap rounded-0">
                      <div class="card rounded-0">
                      <div>
-                        <input type="number" id="id" name ="id" hidden value="<?= $this->research['id'] ?>"/>
-
+                        <input type="number" id="id" name ="id" hidden value="<?= $this->research['id'] ?>"/> 
                     </div>
                     <div class = "mt-3">
                     <label for="title">Title of product</label>
@@ -65,18 +64,19 @@ class Product
                      <input type="number" id="quantity" name="quantity" value="<?= $this->research['quantity'] ?>" required/>
                     </div>
                     <div id='product_IMG'>
-            <?php
-            if ($this->research['image_URL'])
-            {
-            ?> 
-                <img src="<?=$this->research['image_URL']?>" height= '100px' />
-            <?php
-            }
-            ?>
+                        <?php
+                        if ($this->research['image_URL'])
+                        {
+                        ?> 
+                            <img src="<?=$this->research['image_URL']?>" height= '100px' />
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div>
                      <label for="images">Choose images to new upload (PNG, JPG)</label>
-                     <input type="file" id="FILE" name="FILE" accept=".jpg, .jpeg, .png" multiple onclick = "document.getElementById('product_IMG').hidden=true;" />   </div>
+                     <input type="file" id="FILE" name="FILE" accept=".jpg, .jpeg, .png" multiple onclick = "document.getElementById('product_IMG').hidden=true;" />   
+                    </div>
                      <div>
                         <input type="submit" id="submmit" name="Send" value="SAVE"/>
                      </div>
@@ -88,8 +88,8 @@ class Product
             </form>
            
                   
-</div>
-<?php
+        </div>
+    <?php
     }
     public function saveData($data)
     {
@@ -99,34 +99,36 @@ class Product
             { 
                 unlink($_SERVER['DOCUMENT_ROOT'].$this->research['image_URL']); //мы избавляемся от старой ссылки 
             }
-            $sql = "UPDATE product set "; // заменяем стпрую на новую (вставляем новую)
+            $sql = "UPDATE product set "; // создаем запрос на изменение старой записи
         }
         else 
         {
-            $sql = "INSERT into product set "; // используем старую ссылку на изображение
+            $sql = "INSERT into product set "; // создаем запрос на создание новой записи 
         }
         foreach ($data as $key => $val) // ассоциотивному массиву задаем параметры с именами : $key - как ключь и $val как значение
         {
-            if ($key != 'id' && $key != 'Send')
+            if ($key != 'id' && $key != 'Send') //перебераем ключи и исключаем не нужные нам id,Send
             {
-                $sql .= $key . "='".addslashes($val)."', ";
+                $sql .= $key . "='".addslashes($val)."', "; // выбранные ключи слешируем
             }
         }
-         $sql .= " userId=".$_SESSION['user_id']." ";
+         $sql .= " userId=".$_SESSION['user_id']." "; // добавляем сессию id (кто делал)
         
-       if ($data['id'])
+       if ($data['id']) // проверяем существование
        {
          $sql .= ", updatedAt=now() where id=".$data['id'];
        }
        else $sql .= ", createdAt=now()";
+      //echo $sql;
+      // exit;
       $mysqli = new Database();
          $mysqli->runQuery($sql);
     }
     public function deleteData()
     {
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].$this->research['image_URL']))
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].$this->research['image_URL'])) // если у нас есть ссылка используемого изображения и одновременно есть ссылка на новое изобрпжение
         { 
-            unlink($_SERVER['DOCUMENT_ROOT'].$this->research['image_URL']);
+            unlink($_SERVER['DOCUMENT_ROOT'].$this->research['image_URL']); //удаляет картинку 
         }
         $this->mysqli->runQuery('delete from product where id='.$this->research['id']);
         
